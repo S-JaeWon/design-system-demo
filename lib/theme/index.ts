@@ -1,4 +1,5 @@
 import { componentToken, referenceToken, systemToken } from "./colors";
+import { typography } from "./typography";
 
 /** styled-components, tailwindcss에서 import하여 사용. */
 export const theme = {
@@ -7,5 +8,5 @@ export const theme = {
     sys: systemToken,
     comp: componentToken,
   },
-  font: {},
+  fontSize: typography,
 };

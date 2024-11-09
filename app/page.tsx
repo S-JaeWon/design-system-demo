@@ -20,7 +20,12 @@ export default function Home() {
             </code>
             .
           </li>
-          <li>Save and see your changes instantly.</li>
+          <li className="text-ds-Display-2xl-Regular text-comp-button-primary-background">
+            Save and see your changes instantly.
+          </li>
+          <li className="text-ds-Display-xl-Bold text-sys-border-success">
+            TEST
+          </li>
         </ol>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
