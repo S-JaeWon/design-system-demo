@@ -1,3 +1,5 @@
+"use client";
+import { Button } from "@/components/Button";
 import Image from "next/image";
 
 export default function Home() {
@@ -12,6 +14,15 @@ export default function Home() {
           height={38}
           priority
         />
+        <Button
+          size="2xl"
+          hierarchy="Primary"
+          destructive={false}
+          type="button"
+          onClick={() => alert("hi")}
+        >
+          My Button
+        </Button>
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2">
             Get started by editing{" "}
