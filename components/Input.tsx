@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 // ! 디자인 시스템 또는 UI 컴포넌트는 "서비스/비즈니스" 로직을 담아서는 안됩니다. => 어디서든 [재사용] 가능해야 하기 때문! => 가능성을 열어둬라!!!
-type Props = {
+type StyledProps = {
   type:
     | "Default"
     | "Leading-dropdown"
@@ -17,13 +17,19 @@ type Props = {
   label?: string;
   disabled?: boolean;
 };
+
+type Props = StyledProps & JSX.IntrinsicElements["input"]; // ? 우리가 정의한 props와 input 기본 props를 함께 받음.
+
 export const Input = (props: Props) => {
   return (
-    <Wrapper>
+    <Wrapper {...props}>
       {props?.label && <span className="label">{props.label}</span>}
       <div className="input-container">
         {props?.leadingIcon}
-        <input disabled={props?.disabled} />
+        <input
+          disabled={props?.disabled}
+          placeholder={props?.placeholder ?? ""}
+        />
         {props?.trailingIcon}
       </div>
       {/* // TODO : Help Text Prop 설계 및 렌더링.
@@ -61,7 +67,7 @@ export const Input = (props: Props) => {
  */
 
 // ? 크게 머리/가슴/배를 한번에 아우를 수 있는 큰 컨테이너.
-const Wrapper = styled.div(
+const Wrapper = styled.div<StyledProps>(
   ({ theme }) => css`
     display: flex;
     flex-direction: column;
@@ -78,13 +84,15 @@ const Wrapper = styled.div(
       border: 1px solid;
 
       input {
+        /* // ? input 기본 스타일 제거 */
+        all: unset;
         width: 100%;
       }
 
       /* 값이 없으면 */
       &:has(input:placeholder-shown) {
+        border-color: ${theme.colors.comp.input.borderColor.placeholder};
       }
-      border-color: ${theme.colors.comp.input.borderColor.placeholder};
 
       /* 값이 있으면 */
       &:has(input:not(:placeholder-shown)) {
