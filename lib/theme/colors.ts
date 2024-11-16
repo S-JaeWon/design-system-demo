@@ -171,4 +171,17 @@ export const componentToken = {
     secondary: {},
     tertiary: {},
   },
+  input: {
+    labelTextColor: referenceToken.primary.gray[700],
+    borderColor: {
+      placeholder: referenceToken.primary.gray[300],
+      filled: referenceToken.primary.gray[300],
+      focus: referenceToken.primary.brand[300],
+      disabled: referenceToken.primary.gray[300],
+    },
+    backgroundColor: {
+      default: referenceToken.base.white,
+      disabled: referenceToken.primary.gray[50],
+    },
+  },
 };
