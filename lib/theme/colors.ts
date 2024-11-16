@@ -159,10 +159,14 @@ export const componentToken = {
   button: {
     primary: {
       background: referenceToken.primary.brand[600],
-      text: systemToken.text.button,
+      text: {
+        default: systemToken.text.button,
+        disabled: referenceToken.primary.gray[300],
+      },
       hover: referenceToken.primary.brand[400],
       active: referenceToken.primary.brand[800],
-      disabled: referenceToken.primary.brand[300],
+      disabled: referenceToken.primary.brand[200],
+      focus: referenceToken.primary.brand[900],
     },
     secondary: {},
     tertiary: {},

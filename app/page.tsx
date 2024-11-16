@@ -19,9 +19,55 @@ export default function Home() {
           hierarchy="Primary"
           destructive={false}
           type="button"
-          onClick={() => alert("hi")}
+          onClick={() => {}}
         >
-          My Button
+          Button
+        </Button>
+        <Button
+          size="xl"
+          hierarchy="Primary"
+          destructive={false}
+          type="button"
+          onClick={() => {}}
+        >
+          Button
+        </Button>
+        <Button
+          size="lg"
+          hierarchy="Primary"
+          destructive={false}
+          type="button"
+          onClick={() => {}}
+        >
+          Button
+        </Button>
+        <Button
+          size="md"
+          hierarchy="Primary"
+          destructive={false}
+          type="button"
+          onClick={() => {}}
+        >
+          Button
+        </Button>
+        <Button
+          size="sm"
+          hierarchy="Primary"
+          destructive={false}
+          type="button"
+          onClick={() => {}}
+        >
+          Button
+        </Button>
+        <Button
+          size="2xl"
+          hierarchy="Primary"
+          destructive={false}
+          type="button"
+          disabled
+          onClick={() => {}}
+        >
+          Button Disabled
         </Button>
         <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2">
