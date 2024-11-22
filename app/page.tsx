@@ -1,6 +1,8 @@
 "use client";
 import { Button } from "@/components/Button";
 import { CheckIcon } from "@/components/icons/CheckIcon";
+import { ErrorIcon } from "@/components/icons/ErrorIcon";
+import { MailIcon } from "@/components/icons/MailIcon";
 import { Input } from "@/components/Input";
 import Image from "next/image";
 
@@ -15,6 +17,12 @@ export default function Home() {
           trailingIcon={<CheckIcon />}
         />
         <Input type="Default" label="Email" disabled />
+        <Input
+          type="Default"
+          hintText="This is a hint text to help user."
+          trailingIcon={<ErrorIcon />}
+        />
+        <Input type="Default" label="Email" leadingIcon={<MailIcon />} />
         <Image
           className="dark:invert"
           src="/next.svg"
