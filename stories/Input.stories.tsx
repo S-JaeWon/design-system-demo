@@ -27,6 +27,8 @@ export const Primary: Story = {
     type: "Default",
     label: "Label",
     placeholder: "Placeholder",
+    // hintText: "This is a hint text to help user.",
+    destructive: false,
     leadingIcon: <CheckIcon />,
     trailingIcon: (
       <svg

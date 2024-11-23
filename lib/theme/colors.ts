@@ -172,18 +172,21 @@ export const componentToken = {
     tertiary: {},
   },
   input: {
+    hintTextColor: referenceToken.primary.gray[600],
     labelTextColor: referenceToken.primary.gray[700],
     textColor: {
       placeholder: referenceToken.primary.gray[500],
       default: referenceToken.primary.gray[900],
       filled: referenceToken.primary.gray[900],
       disabled: referenceToken.primary.gray[500],
+      destructive: referenceToken.primary.error[500],
     },
     borderColor: {
       placeholder: referenceToken.primary.gray[300],
       filled: referenceToken.primary.gray[300],
       focus: referenceToken.primary.brand[300],
       disabled: referenceToken.primary.gray[300],
+      destructive: referenceToken.primary.error[300],
     },
     backgroundColor: {
       default: referenceToken.base.white,

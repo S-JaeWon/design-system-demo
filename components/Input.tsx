@@ -16,6 +16,8 @@ type StyledProps = {
   // (디자인과 개발의 차이)
   label?: string;
   disabled?: boolean;
+  hintText?: string;
+  destructive?: boolean;
 };
 
 type Props = StyledProps & JSX.IntrinsicElements["input"]; // ? 우리가 정의한 props와 input 기본 props를 함께 받음.
@@ -38,6 +40,19 @@ export const Input = (props: Props) => {
           <div className="trailing-icon">{props.trailingIcon}</div>
         )}
       </div>
+      {/* // ! JavaScript falsy 값을 잘 활용해보자!! */}
+      {/* // ? falsy : false 스러운 값들  => null, undefined, "" */}
+      {/* // * 여기서의 활용이란, 진짜 null 또는 undefined인 경우를 분기하자. */}
+      {/* 
+       // ? props?.hintText를 아예 위에서 안넘겨주면(undefined) -> 렌더링이 안됨.
+       // ? props?.hintText에 빈 문자열("")을 넘겨주면 -> 렌더링이 됨. -> 우리가 준비해놓은 .hint-text의 margin 등의 스타일이 적용됨.
+       // ? -> <Layout Shift> (배치의 변환 - 맨 처음 렌더링 된 상태에서 갑자기 모종의 이유로 px 등 깜빡거리거나 이동해버리는 현상) 방지.
+       // * 프론트엔드 -> UI & 클라이언트 상태관리 전문 개발자. -> UI & UX
+       // ! [프론트엔드 면접 꿀팁 용어] UX(사용자 경험)을 해치지 않기 위해서 UI를 평소에 잘 개발해야 된다.
+      */}
+      {props?.hintText !== undefined && ( // ? props?.hintText props를 넘겨 주었으면! -> 빈 문자열이라도 넘겨주면, Layout Shift 방지.
+        <div className="hint-text">{props?.hintText}</div>
+      )}
       {/* // TODO : Help Text Prop 설계 및 렌더링.
        <span>Help Text</span> */}
     </Wrapper>
@@ -74,7 +89,7 @@ export const Input = (props: Props) => {
 
 // ? 크게 머리/가슴/배를 한번에 아우를 수 있는 큰 컨테이너.
 const Wrapper = styled.div<StyledProps>(
-  ({ theme }) => css`
+  ({ theme, destructive }) => css`
     display: flex;
     flex-direction: column;
 
@@ -91,15 +106,15 @@ const Wrapper = styled.div<StyledProps>(
       border: 1px solid;
       border-radius: 8px;
       padding: 10px 14px;
+      background-color: ${theme.colors.ref.base.white};
 
       .leading-icon {
         margin-right: 8px;
       }
 
       input {
-        /* // ? input 기본 스타일 제거 */
-        /* reset.css, normalize.css, global.css */
-        all: unset;
+        all: unset; /* // ? input 기본 스타일 제거 - 보통 reset.css, normalize.css, next.js에서는 루트 디렉토리의 global.css 사용. */
+
         width: 100%;
         color: ${theme.colors.comp.input.textColor.default};
 
@@ -119,12 +134,29 @@ const Wrapper = styled.div<StyledProps>(
       /* 값이 없으면 */
       &:has(input:placeholder-shown) {
         border-color: ${theme.colors.comp.input.borderColor.placeholder};
+        ${destructive &&
+        css`
+          border-color: ${theme.colors.comp.input.borderColor.destructive};
+        `};
       }
 
       /* 값이 있으면 */
       &:has(input:not(:placeholder-shown)) {
-        /* this.borderColor = ''; */
         border-color: ${theme.colors.comp.input.borderColor.focus};
+      }
+
+      &:has(input:focus) {
+        ${destructive
+          ? css`
+              border-color: ${theme.colors.comp.input.borderColor.destructive};
+              box-shadow: 0px 1px 2px rgba(10, 13, 18, 0.05),
+                0px 0px 0px 4px #fee4e2;
+            `
+          : css`
+              border-color: ${theme.colors.comp.input.borderColor.focus};
+              box-shadow: 0px 1px 2px rgba(10, 13, 18, 0.05),
+                0px 0px 0px 4px #f4ebff;
+            `};
       }
 
       &:has(input:disabled) {
@@ -139,8 +171,25 @@ const Wrapper = styled.div<StyledProps>(
 
       background-color: ${theme.colors.comp.input.backgroundColor.default};
     }
+
+    .hint-text {
+      margin-top: 6px;
+      height: 20px;
+
+      ${theme.fontSize["ds-Text-sm-Regular"]};
+
+      color: ${destructive
+        ? theme.colors.comp.input.textColor.destructive
+        : theme.colors.comp.input.hintTextColor};
+    }
   `
 );
+
+/* // * 굳이 아래처럼 길게 하지 않아도 됩니다. */
+/* font-size: ${theme.fontSize["ds-Text-sm-Medium"][0]} */
+/* ${theme.fontSize["ds-Text-sm-Medium"][1]} */
+
+// ${theme.fontSize["ds-Text-sm-Regular"]};
 /* export const Input2 = () => {
   return (
     <div>
