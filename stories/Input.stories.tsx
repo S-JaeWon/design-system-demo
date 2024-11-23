@@ -25,6 +25,8 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     type: "Default",
+    label: "Label",
+    placeholder: "Placeholder",
     leadingIcon: <CheckIcon />,
     trailingIcon: (
       <svg

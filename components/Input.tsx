@@ -25,12 +25,18 @@ export const Input = (props: Props) => {
     <Wrapper {...props}>
       {props?.label && <span className="label">{props.label}</span>}
       <div className="input-container">
-        {props?.leadingIcon}
+        {props?.leadingIcon && (
+          <div className="leading-icon">{props.leadingIcon}</div>
+        )}
         <input
           disabled={props?.disabled}
           placeholder={props?.placeholder ?? ""}
         />
-        {props?.trailingIcon}
+        {/* // * Conditional Rendering (조건부 렌더링) */}
+        {/* // * Slot : props 등 데이터가 주입될 자리를 만들어 놓는 것. */}
+        {props?.trailingIcon && (
+          <div className="trailing-icon">{props.trailingIcon}</div>
+        )}
       </div>
       {/* // TODO : Help Text Prop 설계 및 렌더링.
        <span>Help Text</span> */}
@@ -81,12 +87,33 @@ const Wrapper = styled.div<StyledProps>(
 
     .input-container {
       display: flex;
+      align-items: center;
       border: 1px solid;
+      border-radius: 8px;
+      padding: 10px 14px;
+
+      .leading-icon {
+        margin-right: 8px;
+      }
 
       input {
         /* // ? input 기본 스타일 제거 */
+        /* reset.css, normalize.css, global.css */
         all: unset;
         width: 100%;
+        color: ${theme.colors.comp.input.textColor.default};
+
+        &::placeholder {
+          color: ${theme.colors.comp.input.textColor.placeholder};
+        }
+
+        &:not(:placeholder-shown) {
+          color: ${theme.colors.comp.input.textColor.filled};
+        }
+      }
+
+      .trailing-icon {
+        margin-left: 0px;
       }
 
       /* 값이 없으면 */
@@ -96,14 +123,21 @@ const Wrapper = styled.div<StyledProps>(
 
       /* 값이 있으면 */
       &:has(input:not(:placeholder-shown)) {
+        /* this.borderColor = ''; */
         border-color: ${theme.colors.comp.input.borderColor.focus};
       }
 
-      background-color: ${theme.colors.comp.input.backgroundColor.default};
-
-      & input:disabled {
+      &:has(input:disabled) {
+        cursor: not-allowed;
+        border-color: ${theme.colors.comp.input.borderColor.disabled};
         background-color: ${theme.colors.comp.input.backgroundColor.disabled};
+
+        & input:disabled {
+          color: ${theme.colors.comp.input.textColor.disabled};
+        }
       }
+
+      background-color: ${theme.colors.comp.input.backgroundColor.default};
     }
   `
 );

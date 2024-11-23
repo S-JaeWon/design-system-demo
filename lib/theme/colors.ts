@@ -173,6 +173,12 @@ export const componentToken = {
   },
   input: {
     labelTextColor: referenceToken.primary.gray[700],
+    textColor: {
+      placeholder: referenceToken.primary.gray[500],
+      default: referenceToken.primary.gray[900],
+      filled: referenceToken.primary.gray[900],
+      disabled: referenceToken.primary.gray[500],
+    },
     borderColor: {
       placeholder: referenceToken.primary.gray[300],
       filled: referenceToken.primary.gray[300],
