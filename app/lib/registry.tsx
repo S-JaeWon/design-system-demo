@@ -24,15 +24,15 @@ export default function StyledComponentsRegistry({
     return <>{styles}</>;
   });
 
-  const content = <ThemeProvider theme={theme}>{children}</ThemeProvider>; // !
+  const content = <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 
   // 브라우저에서 렌더링이 된 경우.
-  if (typeof window !== "undefined") return content; // !
+  if (typeof window !== "undefined") return content;
 
   // 아직 브라우저에서 렌더링이 안 된 경우.
   return (
     <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
-      {content} // !
+      {content}
     </StyleSheetManager>
   );
 }
